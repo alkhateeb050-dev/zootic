@@ -1,0 +1,154 @@
+{
+  "app_name": "Zootic Tracker",
+  "personality": "4 Tactile / Playful LIGHT",
+  "personality_one_liner": "A warm, friendly, and touchable pet care companion designed in full Arabic RTL, prioritizing approachability through chunky soft shapes and the Zootic brand palette.",
+  "color": {
+    "surface": "#FDFBF7",
+    "onSurface": "#1E3A5F",
+    "surfaceSecondary": "#FFFFFF",
+    "onSurfaceSecondary": "#4A617D",
+    "surfaceTertiary": "#F2EEE8",
+    "onSurfaceTertiary": "#1E3A5F",
+    "surfaceInverse": "#1E3A5F",
+    "onSurfaceInverse": "#FFFFFF",
+    "brand": "#D4622A",
+    "brandPrimary": "#D4622A",
+    "onBrandPrimary": "#FFFFFF",
+    "brandSecondary": "#7FA88C",
+    "onBrandSecondary": "#FFFFFF",
+    "brandTertiary": "#FCE9E1",
+    "onBrandTertiary": "#D4622A",
+    "success": "#7FA88C",
+    "onSuccess": "#FFFFFF",
+    "warning": "#EAB308",
+    "onWarning": "#FFFFFF",
+    "error": "#EF4444",
+    "onError": "#FFFFFF",
+    "info": "#7FA88C",
+    "onInfo": "#FFFFFF",
+    "border": "#E8E2D9",
+    "borderStrong": "#D1C7B7",
+    "divider": "#E8E2D9"
+  },
+  "typography": {
+    "displayFontFamily": "Cairo",
+    "textFontFamily": "Cairo",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Generous tactile padding. Minimum 16pt outer margins, 12pt gap between form elements or list items.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 8,
+    "md": 16,
+    "lg": 24,
+    "pill": 999
+  },
+  "shadow_tier": 2,
+  "navigation": "bottom_tabs",
+  "icon_set": "Phosphor",
+  "glassmorphism": {
+    "enabled": true,
+    "do's": [
+      "Use blur over Zootic brandTertiary tint on floating action buttons (FAB).",
+      "Apply frosted glass overlay to sticky bottom tab bar.",
+      "Use frosted glass on the fixed bottom button container in the Add Meal form."
+    ],
+    "dont's": [
+      "Do not blur standard animal cards or list items.",
+      "Do not use glass on form inputs."
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Home / Meals List",
+      "purpose": "A centralized dashboard to view today's and upcoming animal meals, featuring a prominent Zootic store link and filtering options.",
+      "states": {
+        "loading": "Centered brand-colored activity indicator.",
+        "empty": "Illustration of an empty pet bowl with friendly Arabic text indicating no meals scheduled, and a CTA to add one.",
+        "error": "Soft error message offering a retry button to reload local storage."
+      },
+      "layout": "RTL Native. Top area features a fixed, slightly dimensional promotional card with the app's logo and 'زوروا موقعنا zoo-tic.com'. Below it, a horizontally scrolling row of filter chips (الكل, اليوم, الوجبات القادمة) using pill shapes. The main list contains chunky, playful cards representing each meal (animal image on the right, meal details and next schedule left-aligned in RTL flow). A prominent FAB with glass effect sits at the bottom left for adding new meals."
+    },
+    {
+      "name": "Add/Edit Meal Form",
+      "purpose": "A streamlined full-screen or bottom sheet form to log meal data and set reminder notifications.",
+      "states": {
+        "loading": "Skeleton of the form fields.",
+        "empty": "N/A",
+        "error": "Validation errors appear directly under the respective form fields in red."
+      },
+      "layout": "Single column RTL flow. Form fields wrapped in rounded tertiary-surface containers. Segmented controls for common animal types, transitioning to a custom text input if 'Other' is selected. Generous hit areas for date/time pickers. The primary 'Save' button is sticky at the bottom, placed inside a keyboard-avoiding container with glass background so it stays anchored."
+    },
+    {
+      "name": "Animals Directory",
+      "purpose": "A visual gallery of all registered animals managed in the app.",
+      "states": {
+        "loading": "Skeleton grid of animal cards.",
+        "empty": "A cute pet photo with text 'No animals registered yet. Add your first pet!' and a primary CTA.",
+        "error": "Error reading local storage with retry button."
+      },
+      "layout": "2-column grid. Each card (width ~45%) uses soft shadows, showcasing a square photo of the animal with rounded corners, followed by the animal's name and type in Cairo font. The grid fills the horizontal space using flexWrap and space-between."
+    }
+  ],
+  "images": {
+    "empty_meals_state": {
+      "url": "https://images.unsplash.com/photo-1565674244283-993fb27a215f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwxfHxlbXB0eSUyMGJvd2wlMjBwZXQlMjBmb29kfGVufDB8fHx8MTc4ODQzNzU1NXww&ixlib=rb-4.1.0&q=85",
+      "alt": "Dog looking at an empty food bowl from above"
+    },
+    "default_dog_avatar": {
+      "url": "https://images.unsplash.com/photo-1558788353-f76d92427f16?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njd8MHwxfHNlYXJjaHwzfHxjdXRlJTIwZ29sZGVuJTIwcmV0cmlldmVyJTIwZmFjZXxlbnwwfHx8fDE3ODg0Mzc1NTB8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Cute golden retriever face"
+    },
+    "default_cat_avatar": {
+      "url": "https://images.unsplash.com/photo-1638947693941-669835e07b4c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1NzZ8MHwxfHNlYXJjaHwxfHxwbGF5ZnVsJTIwY2F0JTIwZmFjZXxlbnwwfHx8fDE3ODg0Mzc1NTB8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Playful cat face"
+    },
+    "empty_animals_state": {
+      "url": "https://images.unsplash.com/photo-1600352774373-7b992e5189de?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxwZXQlMjBkb2clMjBzaXR0aW5nJTIwcGVhY2VmdWxseXxlbnwwfHx8fDE3ODg0Mzc1NTV8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Dog sitting peacefully"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Ensure I18nManager.forceRTL(true) is implemented from the start. All layouts, icons (directions), and text alignment must reflect Right-to-Left (RTL) rules natively.",
+    "Use Cairo font for all typography to ensure native, modern, and beautiful Arabic rendering. Avoid mixing Latin and Arabic weights unnaturally.",
+    "The Zootic store link must be prominent on the Home Screen. Design it as a persistent, styled banner/card using the brand primary color (#D4622A) or the navy (#1E3A5F), containing the text 'زوروا موقعنا zoo-tic.com' and a matching app-style icon.",
+    "All navigation components (e.g., Back buttons) must correctly mirror for RTL.",
+    "Use Async Storage or Expo SQLite for all data (meals and animals). Ensure data updates trigger UI re-renders immediately.",
+    "Use expo-notifications to schedule local push notifications based on the 'next meal date' minus the 'reminder minutes before' user setting.",
+    "For image selection, use expo-image-picker allowing users to pick from their gallery or camera for animal photos.",
+    "Ensure the primary CTA ('Save' or 'Add') in the Add Meal form is sticky at the bottom over the scroll view, using a frosted glass container to separate it visually."
+  ],
+  "haptics": {
+    "tab_press": "light",
+    "filter_chip_select": "light",
+    "save_meal_success": "success",
+    "delete_meal": "medium",
+    "open_add_modal": "light"
+  }
+}

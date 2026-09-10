@@ -1,0 +1,79 @@
+{
+  "expo": {
+    "name": "Zootic",
+    "slug": "zootic",
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/images/zootic-logo.png",
+    "scheme": "zootic",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.emergent.zootic",
+      "buildNumber": "2",
+      "infoPlist": {
+        "NSCameraUsageDescription": "التقاط صورة للحيوان الأليف"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/zootic-logo.png",
+        "backgroundColor": "#FDFBF7"
+      },
+      "package": "com.emergent.zootic",
+      "versionCode": 2,
+      "permissions": [
+        "CAMERA",
+        "POST_NOTIFICATIONS",
+        "SCHEDULE_EXACT_ALARM"
+      ],
+      "blockedPermissions": [
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/images/zootic-logo.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/zootic-logo.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#FDFBF7"
+        }
+      ],
+      "expo-font",
+      "expo-image",
+      "expo-secure-store",
+      "expo-web-browser",
+      "expo-status-bar",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": false,
+          "cameraPermission": "التقاط صورة للحيوان الأليف"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/zootic-logo.png",
+          "color": "#D4622A"
+        }
+      ],
+      "@react-native-community/datetimepicker",
+      "@react-native-vector-icons/ionicons"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

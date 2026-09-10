@@ -1,0 +1,31 @@
+{
+  "summary": "Frontend-only verification of Google Play Photo Picker compliance fix. Static checks of /app/frontend/app.json all pass: android.permissions=[CAMERA, POST_NOTIFICATIONS, SCHEDULE_EXACT_ALARM] (no READ_MEDIA_IMAGES / READ_EXTERNAL_STORAGE); blockedPermissions correctly lists READ_MEDIA_IMAGES, READ_MEDIA_VIDEO, READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE; expo-image-picker plugin has photosPermission:false and cameraPermission set; android.versionCode=2; expo.version=1.0.1; ios.buildNumber='2'; NSPhotoLibraryUsageDescription removed from ios.infoPlist (only NSCameraUsageDescription remains). Code check of /app/frontend/app/animal-form.tsx confirms no runtime call to requestMediaLibraryPermissionsAsync in the library path (only a comment) — launchImageLibraryAsync is called directly (native Photo Picker). Camera path still gates on requestCameraPermissionsAsync as required. Runtime smoke test on mobile viewport 390x844 via preview URL: app loads (title 'Zootic'), no red-screen error, RTL Arabic UI works, Animals tab FAB opens the animal-form modal, 'المعرض' (pick-library) and 'الكاميرا' (pick-camera) buttons are present, tappable and do not crash on web (native picker no-ops), Save button persists animal 'بيسي/قطة' → animal card renders on grid, Meals tab add-meal-fab is present. All acceptance criteria from the review request are satisfied.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "global", "issues": ["Pre-existing warnings (non-blocking, unrelated to this fix): 'shadow*' style props deprecated → use boxShadow; Image style.resizeMode deprecated → use props.resizeMode."]}
+    ],
+    "react_native_issues": [
+      {"component": "expo-image-picker (animal-form.tsx)", "issue": "Runtime warning: 'ImagePicker.MediaTypeOptions have been deprecated. Use ImagePicker.MediaType or an array of ImagePicker.MediaType instead.' Reference: /app/frontend/app/animal-form.tsx:87 (mediaTypes: ImagePicker.MediaTypeOptions.Images). Not a blocker for this fix, but should be migrated to keep future SDKs working."}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Optional: migrate animal-form.tsx line 87 from ImagePicker.MediaTypeOptions.Images to ImagePicker.MediaType.Images (or ['images']) to silence deprecation warning.",
+    "Optional (carried from iteration_1, unrelated to this fix): replace deprecated shadow* style props with boxShadow, and move Image resizeMode from style to props."
+  ],
+  "critical_code_review_comments": [
+    "app.json permission surface is now Play-policy compliant: READ_MEDIA_IMAGES/READ_MEDIA_VIDEO/READ_EXTERNAL_STORAGE/WRITE_EXTERNAL_STORAGE are all blocked and expo-image-picker.photosPermission:false prevents the plugin from re-merging them.",
+    "animal-form.tsx correctly implements native Photo Picker: launchImageLibraryAsync is called without any prior requestMediaLibraryPermissionsAsync call; camera path retains its permission gate as intended.",
+    "Version bumps (Android versionCode 2, iOS buildNumber '2', expo.version 1.0.1) applied correctly."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "100% for the compliance fix — all 12 verification points pass"},
+  "seed_data_creation": "Created 1 test animal 'بيسي' (قطة) via UI to verify Save flow still works end-to-end.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Photo Picker compliance fix verified on web preview (mobile viewport 390x844). Real native Photo Picker behavior can only be validated on a native Android build (Android 13+) — on web/Expo Go the library picker is a no-op which is expected. Meal CRUD was not re-exercised beyond confirming add-meal-fab renders on the Meals tab, since permissions change does not touch meal flow; refer to iteration_1.json for prior meal CRUD coverage.",
+  "rca_of_issue": "N/A — this iteration validated a fix, no new bug found. The previous compliance risk (READ_MEDIA_IMAGES being auto-added by expo-image-picker plugin) is mitigated by setting photosPermission:false and adding blockedPermissions."
+}
